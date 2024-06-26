@@ -57,24 +57,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Homework4_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/quarto.js"></script>
-<script src="Homework4_files/libs/quarto-html/popper.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Homework4_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Homework4_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Homework4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Homework4_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Homework4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Homework4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
 <body class="fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -290,13 +327,13 @@ $MAE
 <pre><code>List of 10
  $ url        : chr "https://newsapi.org/v2/everything?q=tesla&amp;from=2024-05-26&amp;sortBy=publishedAt&amp;apiKey=d9af7dcfe6714e77bd2c1722b33575c7"
  $ status_code: int 200
- $ headers    :List of 12
+ $ headers    :List of 14
   ..- attr(*, "class")= chr [1:2] "insensitive" "list"
  $ all_headers:List of 1
  $ cookies    :'data.frame':    0 obs. of  7 variables:
- $ content    : raw [1:88051] 7b 22 73 74 ...
- $ date       : POSIXct[1:1], format: "2024-06-26 03:36:19"
- $ times      : Named num [1:6] 0 0.25 0.264 0.295 0.696 ...
+ $ content    : raw [1:88182] 7b 22 73 74 ...
+ $ date       : POSIXct[1:1], format: "2024-06-26 03:51:03"
+ $ times      : Named num [1:6] 0 0.00926 0.02237 0.08453 0.4611 ...
   ..- attr(*, "names")= chr [1:6] "redirect" "namelookup" "connect" "pretransfer" ...
  $ request    :List of 7
   ..- attr(*, "class")= chr "request"
@@ -328,16 +365,16 @@ $MAE
 <pre><code># A tibble: 6 × 8
   source$id  $name author title description url   urlToImage publishedAt content
   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;  
-1 &lt;NA&gt;       Www.… Zeno … "INT… Die Greate… http… https://i… 2024-06-25… "Die S…
-2 &lt;NA&gt;       Www.… Zeno … "INT… Die Greate… http… https://i… 2024-06-25… "Die S…
-3 &lt;NA&gt;       Ixbt… jin@i… "Бол… После того… http… https://w… 2024-06-25… ", Tes…
-4 financial… Fina… Bloom… "BYD… China’s BY… http… https://s… 2024-06-25… "(Bloo…
-5 &lt;NA&gt;       Glob… Marke… "Fut… Chicago, J… http… https://m… 2024-06-25… "Chica…
-6 &lt;NA&gt;       Xata… Adolf… "\"F… Recienteme… http… https://i… 2024-06-25… "Recie…</code></pre>
+1 financial… Fina… Bloom… LG C… LG Chem Lt… http… "https://… 2024-06-25… "(Bloo…
+2 &lt;NA&gt;       Asri… info@… کادی… جنرال موتو… http… ""         2024-06-25… ". 2 2…
+3 &lt;NA&gt;       Www.… Zeno … INTE… Die Greate… http… "https://… 2024-06-25… "Die S…
+4 &lt;NA&gt;       Www.… Zeno … INTE… Die Greate… http… "https://… 2024-06-25… "Die S…
+5 &lt;NA&gt;       Ixbt… jin@i… Боль… После того… http… "https://… 2024-06-25… ", Tes…
+6 financial… Fina… Bloom… BYD … China’s BY… http… "https://… 2024-06-25… "(Bloo…</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>news<span class="sc">$</span>content[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] ", Tesla Model Y , 2023 , .\r\n Dataforce, Model Y 49% : 10 582 , 18-.\r\n , , Tesla, .\r\n Volkswagen . T-Roc 2017 , 12% . T-Roc . Volkswagen Golf, , . Golf , , . Golf 28%.\r\n Dacia Sandero, Model Y.\r\n T-Ro… [+46 chars]"</code></pre>
+<pre><code>[1] "Die Stadt Zürich ist das Lieblingsziel vieler Unternehmen, die in die Schweiz ziehen.\r\nHerr Huber, als neuer Chef der Greater Zurich Area übernehmen Sie die Führung der Standortmarketingorganisation … [+7960 chars]"</code></pre>
 </div>
 </div>
 <p>Write a function to query API.</p>
@@ -360,12 +397,12 @@ $MAE
 <pre><code># A tibble: 6 × 8
   source$id $name  author title description url   urlToImage publishedAt content
   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;  
-1 &lt;NA&gt;      Www.n… Meret… "Die… "Nach deme… http… https://i… 2024-06-25… "Vertr…
-2 &lt;NA&gt;      Onet.… &lt;NA&gt;   "Bar… "&lt;![CDATA[… http… https://o… 2024-06-25… "W ost…
-3 &lt;NA&gt;      Tutto… Dimit… "Ogg… "Non manca… http… https://t… 2024-06-25… "Non m…
-4 &lt;NA&gt;      Tutto… Simon… "Pag… "Ai microf… http… https://t… 2024-06-25… "Ai mi…
-5 news24    News24 Lunga… "Spo… "It says e… http… https://c… 2024-06-25… "It sa…
-6 news24    News24 Khany… "Spo… "In reachi… http… https://c… 2024-06-25… "It's …</code></pre>
+1 &lt;NA&gt;      Trend… Amy D… Spor… "(TrendHun… http… https://c… 2024-06-25… "Palac…
+2 &lt;NA&gt;      Inter… Andrz… Sześ… "Wojciech … http… https://i… 2024-06-25… "Szczs…
+3 espn      ESPN   Greg … The … "After 30 … http… https://a… 2024-06-25… "SUNRI…
+4 &lt;NA&gt;      CNET   Gael … Toda… "Here's to… http… https://w… 2024-06-25… "Look …
+5 &lt;NA&gt;      Onet.… &lt;NA&gt;   Braz… "&lt;![CDATA[… http… https://o… 2024-06-25… "Wielk…
+6 &lt;NA&gt;      Www.n… Meret… Die … "Nach deme… http… https://i… 2024-06-25… "Vertr…</code></pre>
 </div>
 </div>
 <p>Test function again.</p>
@@ -376,18 +413,19 @@ $MAE
 <pre><code># A tibble: 6 × 8
   source$id $name  author title description url   urlToImage publishedAt content
   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;  
-1 &lt;NA&gt;      Www.n… Meret… "Die… "Nach deme… http… https://i… 2024-06-25… "Vertr…
-2 &lt;NA&gt;      Onet.… &lt;NA&gt;   "Bar… "&lt;![CDATA[… http… https://o… 2024-06-25… "W ost…
-3 &lt;NA&gt;      Tutto… Dimit… "Ogg… "Non manca… http… https://t… 2024-06-25… "Non m…
-4 &lt;NA&gt;      Tutto… Simon… "Pag… "Ai microf… http… https://t… 2024-06-25… "Ai mi…
-5 news24    News24 Lunga… "Spo… "It says e… http… https://c… 2024-06-25… "It sa…
-6 news24    News24 Khany… "Spo… "In reachi… http… https://c… 2024-06-25… "It's …</code></pre>
+1 &lt;NA&gt;      Trend… Amy D… Spor… "(TrendHun… http… https://c… 2024-06-25… "Palac…
+2 &lt;NA&gt;      Inter… Andrz… Sześ… "Wojciech … http… https://i… 2024-06-25… "Szczs…
+3 espn      ESPN   Greg … The … "After 30 … http… https://a… 2024-06-25… "SUNRI…
+4 &lt;NA&gt;      CNET   Gael … Toda… "Here's to… http… https://w… 2024-06-25… "Look …
+5 &lt;NA&gt;      Onet.… &lt;NA&gt;   Braz… "&lt;![CDATA[… http… https://o… 2024-06-25… "Wielk…
+6 &lt;NA&gt;      Www.n… Meret… Die … "Nach deme… http… https://i… 2024-06-25… "Vertr…</code></pre>
 </div>
 </div>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
