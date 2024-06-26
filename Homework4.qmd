@@ -1,0 +1,229 @@
+---
+title: "Homework4"
+format: html
+editor: visual
+---
+
+## Name: Xingwang Yu
+
+## Homework4 for ST558
+
+## Task 1: Conceptual Questions
+
+### 1. What is the purpose of the lapply() function? What is the equivalent purrr function?
+
+The lapply() function in R is used to apply a function to each element of a list or vector and return a list of the same length. The equivalent function in the purrr package is map().
+
+### 2. Suppose we have a list called my_list. Each element of the list is a numeric data frame (all columns are numeric). We want use lapply() to run the code cor(numeric_matrix, method = "kendall") on each element of the list. Write code to do this below! (I’m really trying to ask you how you specify method = "kendall" when calling lapply()).
+
+lapply(my_list, function(df) cor(df, method = "kendall"))
+
+### 3. What are two advantages of using purrr functions instead of the BaseR apply family?
+
+The purrr functions provide more consistent and predictable output types, and offer enhanced functionality and ease of use with more expressive syntax and additional features.
+
+### 4. What is a side-effect function?
+
+Side-effect functions are functions that perform additional operations beyond returning a value, such as modifying global variables, printing to the console, or writing to files. While they are necessary for many practical tasks, they should be used carefully to maintain code clarity and predictability.
+
+### 5. Why can you name a variable sd in a function and not cause any issues with the sd function?
+
+Due to R's scoping rules, which determine how R resolves variable names and function names in different contexts, particularly through lexical scoping and the use of environments.
+
+## Task 2 - Writing R Functions
+
+Firstly, I write a function to get RMSE, and remove NA values.
+
+```{r}
+getRMSE <- function(response, predicted, ...) {
+  # Ensure that response and predicted are the same length
+  if (length(response) != length(predicted)) {
+    stop("The lengths of response and predicted values must be the same")
+  }
+  
+  # Calculate the mean of the squared differences
+  mean_squared_diff <- mean((response - predicted)^2, ...)
+  
+  # Calculate the square root of the mean squared differences
+  root_mean_squared_error <- sqrt(mean_squared_diff)
+  
+  return(root_mean_squared_error)
+}
+```
+
+Then, I will create some response and prediction values
+
+```{r}
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+```
+
+Then, I will use generated values to test my RMSE function.
+
+```{r}
+getRMSE(resp, pred)
+```
+
+Then, I will replace two of the response values with NA, and then test RMSE function.
+
+```{r}
+resp_na <- replace(resp, c(1,80), c(NA,NA))
+
+getRMSE(resp_na, pred)
+getRMSE(resp_na, pred, na.rm = TRUE)
+```
+
+The another common metric for evaluating predictions is MAE. I will write a function to get MAE.
+
+```{r}
+getMAE <- function(response, predicted, ...) {
+  # Ensure that response and predicted are the same length
+  if (length(response) != length(predicted)) {
+    stop("The lengths of response and predicted values must be the same")
+  }
+  
+  # Calculate the mean of the squared differences
+  mean_absolute_deviation <- mean(abs(response - predicted), ...)
+  
+  return(mean_absolute_deviation)
+}
+```
+
+Then, I will create some response and prediction values
+
+```{r}
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+```
+
+Then, I will use generated values to test my MAE function.
+
+```{r}
+getMAE(resp, pred)
+```
+
+Then, I will replace two of the response values with NA, and then test RMSE function.
+
+```{r}
+resp_na <- replace(resp, c(1,80), c(NA,NA))
+
+getMAE(resp_na, pred)
+getMAE(resp_na, pred, na.rm = TRUE)
+```
+
+```{r}
+my_wrapper <- function(response, predicted, rmse = TRUE, mae = TRUE) {
+  # Ensure that response and predicted are the same length
+  if (length(response) != length(predicted)) {
+    stop("The lengths of response and predicted values must be the same")
+  }
+  
+  if (is.vector(response) & is.atomic(response) & is.numeric(response) == FALSE) {
+    stop("The response value must be the an atomic numertic vector")
+  }
+  
+  if (is.vector(predicted) & is.atomic(predicted) & is.numeric(predicted) == FALSE) {
+    stop("The predicted value must be the an atomic numertic vector")
+  }
+
+  RMSE <- getRMSE(response, predicted, na.rm = TRUE)
+  MAE <- getMAE(response, predicted, na.rm = TRUE)
+
+  if (rmse == TRUE & mae == FALSE) {
+    return(RMSE)
+  } else if (rmse == FALSE & mae == TRUE) {
+    return(MAE)
+  } else if (rmse == TRUE & mae == TRUE) {
+    return(list(RMSE = RMSE, MAE = MAE))
+  }
+  
+} 
+```
+
+Then, I will create some response and prediction values
+
+```{r}
+set.seed(10)
+n <- 100
+x <- runif(n)
+resp <- 3 + 10*x + rnorm(n)
+pred <- predict(lm(resp ~ x), data.frame(x))
+```
+
+Then, I will test the wapper function
+
+```{r}
+my_wrapper(resp, pred)
+my_wrapper(resp, pred, rmse = TRUE, mae = FALSE)
+my_wrapper(resp, pred, rmse = FALSE, mae = TRUE)
+```
+
+Then, I will replace two of the response values with "A", and then test the function.
+
+```{r}
+#| error: true
+resp_A <- replace(resp, c(1,80), c("A","A"))
+
+my_wrapper(resp_A, pred)
+```
+
+## Task 3 - Querying an API and a Tidy-Style Function
+
+Return information about Tesla that has been in the news lately.
+
+```{r}
+URL_id <- "https://newsapi.org/v2/everything?q=tesla&from=2024-05-26&sortBy=publishedAt&apiKey=d9af7dcfe6714e77bd2c1722b33575c7"
+news_info <- httr::GET(URL_id)
+str(news_info, max.level = 1)
+```
+
+Parse the returned data into tibble table, and find the article content.
+
+```{r}
+library(jsonlite)
+library(tidyverse)
+parsed <- fromJSON(rawToChar(news_info$content)) 
+news<- as_tibble(parsed$articles)
+head(news)
+news$content[3]
+```
+
+Write a function to query API.
+
+```{r}
+query <-function(subject, date, apiKey) {
+  base_url <- "https://newsapi.org/v2/everything?"
+  URL_id <- paste0(base_url, "q=", subject, "&from=", date, "&sortBy=publishedAt&apiKey=", apiKey)
+
+  info <- httr::GET(URL_id)
+  parsed <- fromJSON(rawToChar(info$content)) 
+  news<- as_tibble(parsed$articles)
+  return(news)
+}
+```
+
+Then, test function.
+
+```{r}
+sports <- query("sport", "2024-05-28", "d9af7dcfe6714e77bd2c1722b33575c7")
+head(sports)
+```
+
+Test function again.
+
+```{r}
+music <- query("music", "2024-06-02", "d9af7dcfe6714e77bd2c1722b33575c7")
+head(sports)
+```
+
+```{r}
+```
+
+```{r}
+```
